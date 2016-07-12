@@ -12,8 +12,17 @@
 </ul>
 
 <ul>
+  <h2>Organizations:</h2>
+  <% @user.organizations.each do |org| %>
+  <li><%= org["name"] %></li>
+  <% end %>
+</ul>
+
+<ul>
+  <h2>Events For Logged In User</h2>
   <% @user.events.each do |event| %>
     <li><%= event %></li>
   <% end %>
 </ul>
+
 </div>
