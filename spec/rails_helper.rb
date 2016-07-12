@@ -29,6 +29,23 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+module OmniauthMod
+  def mock_omniauth
+    OmniAuth.config.mock_auth[:github] = {
+      'provider' => 'github',
+      'uid' => '123545',
+      'user_info' => {
+        'name'      => 'mockuser',
+        'nickname'  => 'mockusernickname',
+        'image'     => 'mock_user_thumbnail_url'
+      },
+      'credentials' => {
+        'token' => 'mock_token',
+      }
+    }
+  end
+end
+
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
@@ -42,6 +59,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
   config.include(OmniauthMod)
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
