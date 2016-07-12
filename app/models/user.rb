@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     UserServices.new.followers(self)
   end
 
+  def following
+    UserServices.new.following(self)
+  end
+
 end

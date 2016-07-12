@@ -10,6 +10,12 @@ class UserServices
     parse(response)
   end
 
+  def following(user)
+    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+    response = connection.get('/user/following')
+    parse(response)
+  end
+
   def parse(response)
     JSON.parse(response.body)
   end
