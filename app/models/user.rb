@@ -31,4 +31,12 @@ class User < ActiveRecord::Base
     UserServices.new.repositories(self)
   end
 
+  def activity
+    UserServices.new.activities(self)
+  end
+
+  def events
+    UserServices.new.push_events(self)
+  end
+
 end
