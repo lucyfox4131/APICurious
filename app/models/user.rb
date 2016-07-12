@@ -27,4 +27,8 @@ class User < ActiveRecord::Base
     UserServices.new.starred(self)
   end
 
+  def repos
+    UserServices.new.repositories(self)
+  end
+
 end
