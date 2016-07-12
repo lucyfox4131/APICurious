@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
-
   root to: 'homes#show'
 
   get '/auth/github', as: :github_login

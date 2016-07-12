@@ -14,4 +14,9 @@ class User < ActiveRecord::Base
       new_user.oauth_token          = auth_info.credentials.token
     end
   end
+
+  def followers
+    UserServices.new.followers(self)
+  end
+
 end
