@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     UserServices.new.following(self)
   end
 
+  def starred
+    UserServices.new.starred(self)
+  end
+
 end
