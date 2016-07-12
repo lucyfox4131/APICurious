@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
       new_user.nickname             = auth_info.info.nickname
       new_user.avatar               = auth_info.info.image
       new_user.oauth_token          = auth_info.credentials.token
-      # new_user.oauth_token_secret   = auth_info.credentials.secret #is there actually a secret here
     end
   end
 end

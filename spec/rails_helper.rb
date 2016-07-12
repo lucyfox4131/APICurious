@@ -31,10 +31,11 @@ end
 
 module OmniauthMod
   def mock_omniauth
-    OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+      'provider' => :github,
       'uid' => '123545',
-      'user_info' => {
+      'info' => {
         'name'      => 'mockuser',
         'nickname'  => 'mockusernickname',
         'image'     => 'mock_user_thumbnail_url'
@@ -42,7 +43,7 @@ module OmniauthMod
       'credentials' => {
         'token' => 'mock_token',
       }
-    }
+    })
   end
 end
 
