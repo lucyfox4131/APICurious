@@ -10,4 +10,10 @@
     <li><%= link_to repo["name"], repo["html_url"] %></li>
   <% end %>
 </ul>
+
+<ul>
+  <% @user.events.each do |event| %>
+    <li><%= event %></li>
+  <% end %>
+</ul>
 </div>

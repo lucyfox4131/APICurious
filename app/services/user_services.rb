@@ -28,6 +28,19 @@ class UserServices
     parse(response)
   end
 
+  def activities(user)
+    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+    response = connection.get('/feeds')
+    parse(response)
+  end
+
+  def push_events(user)
+    # GET /users/:username/events
+    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+    response = connection.get("/users/#{user.nickname}/events")
+    parse(response)
+  end
+
   def parse(response)
     JSON.parse(response.body)
   end
