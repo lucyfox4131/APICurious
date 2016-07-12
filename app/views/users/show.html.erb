@@ -6,7 +6,6 @@
   <h2>You Have Starred <%= @user.starred.count %> repos </h2>
 
 <ul>
-
   <% @user.repos.each do |repo| %>
     <li><%= link_to repo["name"], repo["html_url"] %></li>
   <% end %>
