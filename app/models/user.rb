@@ -39,4 +39,8 @@ class User < ActiveRecord::Base
     UserServices.new.push_events(self)
   end
 
+  def organizations
+    UserServices.new.orgs(self)
+  end
+
 end

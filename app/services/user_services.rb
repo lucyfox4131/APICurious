@@ -35,9 +35,14 @@ class UserServices
   end
 
   def push_events(user)
-    # GET /users/:username/events
     connection.headers["Authorization"] = "Token #{user.oauth_token}"
     response = connection.get("/users/#{user.nickname}/events")
+    parse(response)
+  end
+
+  def orgs(user)
+    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+    response = connection.get("/user/orgs")
     parse(response)
   end
 
