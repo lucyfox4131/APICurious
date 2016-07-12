@@ -16,6 +16,18 @@ class UserServices
     parse(response)
   end
 
+  def starred(user)
+    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+    response = connection.get('/user/starred')
+    parse(response)
+  end
+
+  def repositories(user)
+    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+    response = connection.get('/user/repos')
+    parse(response)
+  end
+
   def parse(response)
     JSON.parse(response.body)
   end
