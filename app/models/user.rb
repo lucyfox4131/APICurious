@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+  before_create :create_slug
+
+  def create_slug
+    self.nickname_slug = self.nickname.parameterize
+  end
+
   def self.from_omniauth(auth_info)
     where(uid: auth_info[:uid]).first_or_create do |new_user|
       new_user.uid                  = auth_info.uid
@@ -8,4 +14,13 @@ class User < ActiveRecord::Base
       new_user.oauth_token          = auth_info.credentials.token
     end
   end
+
+  def followers
+    UserServices.new.followers(self)
+  end
+
+  def following
+    UserServices.new.following(self)
+  end
+
 end
