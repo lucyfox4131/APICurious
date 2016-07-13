@@ -21,7 +21,17 @@
 <ul>
   <h2>Events For Logged In User</h2>
   <% @user.events.each do |event| %>
-    <li><%= event %></li>
+    <li>Event Type: <%= event["type"] %></li>
+  <% end %>
+</ul>
+
+<ul>
+  <h2>Events For People You Follow: </h2>
+  <% @user.following_events.each do |user_events| %>
+  <!-- <li><h4>Events for <%#= user_events["actor"]["login"] %></h4></li> -->
+    <!-- <%# user_events.each do |event| %> -->
+      <!-- Event Type: <%#= event["type"] %> -->
+    <!-- <%# end %> -->
   <% end %>
 </ul>
 

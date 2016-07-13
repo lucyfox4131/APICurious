@@ -1,4 +1,4 @@
-class UserServices
+class UserService
 
   def initialize
     @_connection = Faraday.new("https://api.github.com")
@@ -37,6 +37,11 @@ class UserServices
   def push_events(user)
     connection.headers["Authorization"] = "Token #{user.oauth_token}"
     response = connection.get("/users/#{user.nickname}/events")
+    parse(response)
+  end
+
+  def other_user_events(username)
+    response = connection.get("/users/#{username}/events")
     parse(response)
   end
 

@@ -16,31 +16,36 @@ class User < ActiveRecord::Base
   end
 
   def followers
-    UserServices.new.followers(self)
+    UserService.new.followers(self)
   end
 
   def following
-    UserServices.new.following(self)
+    UserService.new.following(self)
   end
 
   def starred
-    UserServices.new.starred(self)
+    UserService.new.starred(self)
   end
 
   def repos
-    UserServices.new.repositories(self)
+    UserService.new.repositories(self)
   end
 
   def activity
-    UserServices.new.activities(self)
+    UserService.new.activities(self)
   end
 
   def events
-    UserServices.new.push_events(self)
+    UserService.new.push_events(self)
   end
 
   def organizations
-    UserServices.new.orgs(self)
+    UserService.new.orgs(self)
   end
 
+  def following_events
+    following.map do |person|
+      UserService.new.other_user_events(person["login"])
+    end
+  end
 end
