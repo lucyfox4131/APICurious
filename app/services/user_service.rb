@@ -1,8 +1,8 @@
 class UserService
 
   def initialize(user)
-    @_connection = Faraday.new("https://api.github.com")
     @_user = user
+    @_connection = Faraday.new("https://api.github.com")
     @_connection.headers["Authorization"] = "Token #{user.oauth_token}"
   end
 
@@ -31,13 +31,12 @@ class UserService
     parse(response)
   end
 
-  def other_user_events
+  def other_user_events(username)
     response = connection.get("/users/#{username}/events")
     parse(response)
   end
 
-  def orgs(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+  def orgs
     response = connection.get("/users/#{user.nickname}/orgs")
     parse(response)
   end

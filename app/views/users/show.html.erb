@@ -1,12 +1,12 @@
 <div class="container user">
 
   <div class="row well ">
-    <h1 class="text-center"><%= @user.name %></h1>
-    <div class="image col-md-5"><%= image_tag(@user.avatar, size: '200x200') %></div>
+    <h1 class="text-center"><%= @git_accessor.user.name %></h1>
+    <div class="image col-md-5"><%= image_tag(@git_accessor.user.avatar, size: '200x200') %></div>
     <div class="col-md-5">
-      <h2>You Have <%= @user.followers.count %> followers </h2>
-      <h2>You Are Following <%= @user.following.count %> people </h2>
-      <h2>You Have Starred <%= @user.starred.count %> repos </h2>
+      <h2>You Have <%= @git_accessor.followers.count %> followers </h2>
+      <h2>You Are Following <%= @git_accessor.following.count %> people </h2>
+      <h2>You Have Starred <%= @git_accessor.starred.count %> repos </h2>
       <%= button_to "Logout", logout_path, method: :delete, class: 'btn btn-info' %>
     </div>
   </div>
@@ -24,8 +24,8 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="repos">
         <ul>
-          <% @user.repos.each do |repo| %>
-            <li><%= link_to repo["name"], repo["html_url"], target: "blank" %></li>
+          <% @git_accessor.repos.each do |repo| %>
+            <li><%= link_to repo.name, repo.html_url, target: "blank" %></li>
           <% end %>
         </ul>
       </div>
@@ -33,8 +33,8 @@
       <div role="tabpanel" class="tab-pane" id="organizations">
         <ul>
           <h2>Organizations:</h2>
-          <% @user.organizations.each do |org| %>
-          <li><%= link_to org["login"], org["url"] %></li>
+          <% @git_accessor.organizations.each do |org| %>
+          <li><%= link_to org.login, org.url %></li>
           <% end %>
         </ul>
       </div>
@@ -42,7 +42,7 @@
       <div role="tabpanel" class="tab-pane" id="yourfeed">
         <ul>
           <h2>Events For Logged In User</h2>
-          <% @user.filtered_individual_events.each do |event| %>
+          <% @git_accessor.events.each do |event| %>
             <li><%= event.event_description %></li>
           <% end %>
         </ul>
@@ -50,7 +50,7 @@
 
       <div role="tabpanel" class="tab-pane" id="othersfeed">
         <ul>
-          <% @user.filtered_following_events.each do |event| %>
+          <% @git_accessor.following_events.each do |event| %>
               <li> <%= event.event_description %> </li>
           <% end %>
          </ul>

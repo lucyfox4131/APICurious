@@ -14,20 +14,4 @@ class User < ActiveRecord::Base
       new_user.oauth_token          = auth_info.credentials.token
     end
   end
-
-  def organizations
-    UserService.new.orgs(self)
-  end
-
-  def following_events
-    following.map do |person|
-      UserService.new.other_user_events(person["login"])
-    end.flatten
-  end
-
-  def filtered_following_events
-    following_events.map do |event|
-      PersonalEvent.new(event) if event["type"].include?("Push")
-    end.compact
-  end
 end

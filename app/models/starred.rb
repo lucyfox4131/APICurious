@@ -1,5 +1,5 @@
 class Starred < OpenStruct
   def self.all(service)
-    service.starred.each { |starred| Starred.new(starred) }
+    service.starred.map { |starred| Starred.new(starred) }
   end
 end

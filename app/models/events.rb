@@ -2,13 +2,13 @@ class Events < OpenStruct
 
   def self.all(service)
     service.push_events.map do |event|
-      Events.new(event) if event["type"].inlcude?("Push")
+      Events.new(event) if event["type"].include?("Push")
     end.compact
   end
 
-  def self.all_for_following(service)
-    service.other_user_events.map do |event|
-      Events.new(event) if event["type"].inlcude?("Push")
+  def self.all_for_following(service, username)
+    service.other_user_events(username).map do |event|
+      Events.new(event) if event["type"].include?("Push")
     end.compact
   end
 
