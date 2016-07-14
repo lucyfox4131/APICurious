@@ -1,0 +1,8 @@
+<div class="container">
+  <h1 class='text-center'>Starred Repos</h1><br>
+  <ul>
+    <% @stars.each do |repo| %>
+        <li><%= link_to repo.name, repo.svn_url %></li>
+    <% end %>
+  </ul>
+</div>

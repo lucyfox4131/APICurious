@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class='text-center'>Followers</h1><br>
+
+  <% @followers.each do |person| %>
+    <div class="col-md-4">
+      <%= image_tag(person.avatar_url, size: '200x200') %>
+      <%= link_to person.login, person.html_url %>
+    </div>
+  <% end %>
+
+</div>

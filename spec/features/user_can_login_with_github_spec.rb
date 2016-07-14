@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "User Logs in" do
   scenario "User can successfully login with github" do
-    result = mock_omniauth
+    mock_omniauth
     visit root_path
 
     expect(page).to have_content("Welcome, Sign In With Github")

@@ -1,12 +1,12 @@
 <div class="container user">
 
   <div class="row well ">
-    <h1 class="text-center"><%= @git_accessor.user.name %></h1>
-    <div class="image col-md-5"><%= image_tag(@git_accessor.user.avatar, size: '200x200') %></div>
-    <div class="col-md-5">
-      <h2>You Have <%= @git_accessor.followers.count %> followers </h2>
-      <h2>You Are Following <%= @git_accessor.following.count %> people </h2>
-      <h2>You Have Starred <%= @git_accessor.starred.count %> repos </h2>
+    <h1 class="text-center"><%= current_user.name %></h1>
+    <div class="image col-md-5"><%= image_tag(current_user.avatar, size: '200x200') %></div>
+    <div class="col-md-7">
+      <h2><%= link_to @git_accessor.followers.count, followers_path %> Followers,
+      <%= link_to @git_accessor.following.count, followings_path %> Following,
+      <%= link_to @git_accessor.starred.count, stars_path %> Starred</h2>
       <%= button_to "Logout", logout_path, method: :delete, class: 'btn btn-info' %>
     </div>
   </div>

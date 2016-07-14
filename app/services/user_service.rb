@@ -7,38 +7,31 @@ class UserService
   end
 
   def followers
-    response = connection.get('/user/followers')
-    parse(response)
+    parse(connection.get('/user/followers'))
   end
 
   def following
-    response = connection.get('/user/following')
-    parse(response)
+    parse(connection.get('/user/following'))
   end
 
   def starred
-    response = connection.get('/user/starred')
-    parse(response)
+    parse(connection.get('/user/starred'))
   end
 
   def repositories
-    response = connection.get('/user/repos')
-    parse(response)
+    parse(connection.get('/user/repos'))
   end
 
   def push_events
-    response = connection.get("/users/#{user.nickname}/events")
-    parse(response)
+    parse(connection.get("/users/#{user.nickname}/events"))
   end
 
   def other_user_events(username)
-    response = connection.get("/users/#{username}/events")
-    parse(response)
+    parse(connection.get("/users/#{username}/events"))
   end
 
   def orgs
-    response = connection.get("/users/#{user.nickname}/orgs")
-    parse(response)
+    parse(connection.get("/users/#{user.nickname}/orgs"))
   end
 
   def parse(response)
