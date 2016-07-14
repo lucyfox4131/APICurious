@@ -1,38 +1,68 @@
-<div class="container">
-  <h1><%= @user.name %></h1>
-  <%= image_tag @user.avatar %>
-  <h2>You Have <%= @user.followers.count %> followers </h2>
-  <h2>You Are Following <%= @user.following.count %> people </h2>
-  <h2>You Have Starred <%= @user.starred.count %> repos </h2>
+<div class="container user">
 
-<ul>
-  <% @user.repos.each do |repo| %>
-    <li><%= link_to repo["name"], repo["html_url"] %></li>
-  <% end %>
-</ul>
+  <div class="row well ">
+    <h1 class="text-center"><%= @user.name %></h1>
+    <div class="image"><%= image_tag(@user.avatar, size: '200x200') %></div>
+    <div class="col-md-5">
+      <h2>You Have <%= @user.followers.count %> followers </h2>
+      <h2>You Are Following <%= @user.following.count %> people </h2>
+      <h2>You Have Starred <%= @user.starred.count %> repos </h2>
+      <%= button_to "Logout", logout_path, method: :delete, class: 'btn btn-info' %>
+    </div>
+  </div>
 
-<ul>
-  <h2>Organizations:</h2>
-  <% @user.organizations.each do |org| %>
-  <li><%= org["name"] %></li>
-  <% end %>
-</ul>
+  <div class="user_tabs">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#repos" aria-controls="home" role="tab" data-toggle="tab">Your Repos</a></li>
+      <li role="presentation"><a href="#organizations" aria-controls="profile" role="tab" data-toggle="tab">Organizations</a></li>
+      <li role="presentation"><a href="#yourfeed" aria-controls="messages" role="tab" data-toggle="tab">Your Recent Activity</a></li>
+      <li role="presentation"><a href="#othersfeed" aria-controls="settings" role="tab" data-toggle="tab">Recent Activity - Following</a></li>
+    </ul>
 
-<ul>
-  <h2>Events For Logged In User</h2>
-  <% @user.events.each do |event| %>
-    <li>Event Type: <%= event["type"] %></li>
-  <% end %>
-</ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="repos">
+        <ul>
+          <% @user.repos.each do |repo| %>
+            <li><%= link_to repo["name"], repo["html_url"] %></li>
+          <% end %>
+        </ul>
+      </div>
 
-<ul>
-  <h2>Events For People You Follow: </h2>
-  <% @user.following_events.each do |user_events| %>
-  <!-- <li><h4>Events for <%#= user_events["actor"]["login"] %></h4></li> -->
-    <!-- <%# user_events.each do |event| %> -->
-      <!-- Event Type: <%#= event["type"] %> -->
-    <!-- <%# end %> -->
-  <% end %>
-</ul>
+      <div role="tabpanel" class="tab-pane" id="organizations">
+        <ul>
+          <h2>Organizations:</h2>
+          <% @user.organizations.each do |org| %>
+          <li><%= link_to org["login"], org["url"] %></li>
+          <% end %>
+        </ul>
+      </div>
 
+      <div role="tabpanel" class="tab-pane" id="yourfeed">
+        <ul>
+          <h2>Events For Logged In User</h2>
+          <% @user.events.each do |event| %>
+            <li>Event Type: <%= event["type"] %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="othersfeed">
+        <!-- <ul>
+          <! Decide how this should display/be organized. Probaly sequential. Order these by event["created_at"] -->
+          <!-- Switch the event pieces to another model and use open struct to create them  -->
+          <!-- pushevent, author will be different  -->
+          <!-- <h2>Events For People You Follow: </h2> -->
+          <%# @user.following_events.each do |user_events| %>
+            <%# user_events.each do |event| %>
+              <!-- <li>Event Type: <%#= event["type"] %></li> -->
+              <!-- event["actor"]["login"] -->
+              <!-- event["actor"]["avatar_url"] -->
+            <%# end %>
+          <%# end %>
+        <!-- </ul> -->
+      </div>
+    </div>
+  </div>
 </div>

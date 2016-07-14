@@ -16,3 +16,21 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ body {
+   background-color: rgb(220, 220, 220);
+ }
+
+
+ .vertical-align {
+   transform: translateY(-50%);
+   top: 50%;
+   position: absolute;
+ }
+
+ .magic-center {
+   transform: translate(-50%, -50%);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+ }
