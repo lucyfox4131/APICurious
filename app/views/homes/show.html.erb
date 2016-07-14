@@ -1,4 +1,9 @@
 <div class="container sign-in magic-center">
-  <h1>Welcome, Sign In With Github</h1>
-  <%= button_to "Login with Github", github_login_path, method: :get, class: "btn btn-info btn-lg" %>
+  <% if current_user %>
+    <h1>Welcome, Check Out Your Github Profile</h1>
+    <%= button_to "My Info", dashboard_path(current_user.nickname_slug), method: :get, class: "btn btn-info btn-lg" %>
+  <% else %>
+    <h1>Welcome, Sign In With Github</h1>
+    <%= button_to "Login with Github", github_login_path, method: :get, class: "btn btn-info btn-lg" %>
+  <% end %>
 </div>

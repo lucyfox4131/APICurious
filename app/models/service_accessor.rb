@@ -6,7 +6,7 @@ class ServiceAccessor
   end
 
   def service
-    UserService.new(user)
+    @service ||= UserService.new(user)
   end
 
   def followers
@@ -38,5 +38,4 @@ class ServiceAccessor
       Events.all_for_following(service, person.login)
     end.flatten
   end
-
 end
