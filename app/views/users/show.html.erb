@@ -1,7 +1,7 @@
 <div class="container user">
 
   <div class="row well ">
-    <h1 class="text-center"><%= current_user.name %></h1>
+    <h1 class="text-center">Hello, <%= current_user.name %></h1>
     <div class="image col-md-5"><%= image_tag(current_user.avatar, size: '200x200') %></div>
     <div class="col-md-7">
       <h2><%= link_to @git_accessor.followers.count, followers_path %> Followers,

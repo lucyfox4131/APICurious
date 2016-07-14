@@ -39,14 +39,14 @@ module OmniauthMod
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
       'provider' => :github,
-      'uid' => '123545',
+      'uid' => '14189706',
       'info' => {
-        'name'      => 'mockuser',
-        'nickname'  => 'mockusernickname',
-        'image'     => 'mock_user_thumbnail_url'
+        'name'      => 'Lucy Fox',
+        'nickname'  => 'lucyfox4131',
+        'image'     => 'https://avatars.githubusercontent.com/u/14189706?v=3'
       },
       'credentials' => {
-        'token' => 'mock_token',
+        'token' => ENV["TOKEN"],
       }
     })
   end
