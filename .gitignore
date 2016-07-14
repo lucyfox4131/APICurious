@@ -13,3 +13,5 @@
 /tmp
 
 /config/application.yml
+
+/spec/cassettes/*
