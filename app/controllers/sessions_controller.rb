@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path(user.nickname_slug)
     else
-      "Login To View Your Dashboard"
+      flash[:notice] = "Login To View Your Dashboard"
       redirect_to root_path
     end
   end
