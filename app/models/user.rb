@@ -15,30 +15,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def followers
-    UserService.new.followers(self)
-  end
-
-  def following
-    UserService.new.following(self)
-  end
-
-  def starred
-    UserService.new.starred(self)
-  end
-
-  def repos
-    UserService.new.repositories(self)
-  end
-
-  def activity
-    UserService.new.activities(self)
-  end
-
-  def events
-    UserService.new.push_events(self)
-  end
-
   def organizations
     UserService.new.orgs(self)
   end
@@ -46,6 +22,12 @@ class User < ActiveRecord::Base
   def following_events
     following.map do |person|
       UserService.new.other_user_events(person["login"])
-    end
+    end.flatten
+  end
+
+  def filtered_following_events
+    following_events.map do |event|
+      PersonalEvent.new(event) if event["type"].include?("Push")
+    end.compact
   end
 end

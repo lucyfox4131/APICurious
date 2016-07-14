@@ -2,7 +2,7 @@
 
   <div class="row well ">
     <h1 class="text-center"><%= @user.name %></h1>
-    <div class="image"><%= image_tag(@user.avatar, size: '200x200') %></div>
+    <div class="image col-md-5"><%= image_tag(@user.avatar, size: '200x200') %></div>
     <div class="col-md-5">
       <h2>You Have <%= @user.followers.count %> followers </h2>
       <h2>You Are Following <%= @user.following.count %> people </h2>
@@ -25,7 +25,7 @@
       <div role="tabpanel" class="tab-pane active" id="repos">
         <ul>
           <% @user.repos.each do |repo| %>
-            <li><%= link_to repo["name"], repo["html_url"] %></li>
+            <li><%= link_to repo["name"], repo["html_url"], target: "blank" %></li>
           <% end %>
         </ul>
       </div>
@@ -42,26 +42,18 @@
       <div role="tabpanel" class="tab-pane" id="yourfeed">
         <ul>
           <h2>Events For Logged In User</h2>
-          <% @user.events.each do |event| %>
-            <li>Event Type: <%= event["type"] %></li>
+          <% @user.filtered_individual_events.each do |event| %>
+            <li><%= event.event_description %></li>
           <% end %>
         </ul>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="othersfeed">
-        <!-- <ul>
-          <! Decide how this should display/be organized. Probaly sequential. Order these by event["created_at"] -->
-          <!-- Switch the event pieces to another model and use open struct to create them  -->
-          <!-- pushevent, author will be different  -->
-          <!-- <h2>Events For People You Follow: </h2> -->
-          <%# @user.following_events.each do |user_events| %>
-            <%# user_events.each do |event| %>
-              <!-- <li>Event Type: <%#= event["type"] %></li> -->
-              <!-- event["actor"]["login"] -->
-              <!-- event["actor"]["avatar_url"] -->
-            <%# end %>
-          <%# end %>
-        <!-- </ul> -->
+        <ul>
+          <% @user.filtered_following_events.each do |event| %>
+              <li> <%= event.event_description %> </li>
+          <% end %>
+         </ul>
       </div>
     </div>
   </div>

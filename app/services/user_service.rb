@@ -1,46 +1,37 @@
 class UserService
 
-  def initialize
+  def initialize(user)
     @_connection = Faraday.new("https://api.github.com")
+    @_user = user
+    @_connection.headers["Authorization"] = "Token #{user.oauth_token}"
   end
 
-  def followers(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+  def followers
     response = connection.get('/user/followers')
     parse(response)
   end
 
-  def following(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+  def following
     response = connection.get('/user/following')
     parse(response)
   end
 
-  def starred(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+  def starred
     response = connection.get('/user/starred')
     parse(response)
   end
 
-  def repositories(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+  def repositories
     response = connection.get('/user/repos')
     parse(response)
   end
 
-  def activities(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
-    response = connection.get('/feeds')
-    parse(response)
-  end
-
-  def push_events(user)
-    connection.headers["Authorization"] = "Token #{user.oauth_token}"
+  def push_events
     response = connection.get("/users/#{user.nickname}/events")
     parse(response)
   end
 
-  def other_user_events(username)
+  def other_user_events
     response = connection.get("/users/#{username}/events")
     parse(response)
   end
@@ -56,7 +47,12 @@ class UserService
   end
 
   private
-  def connection
-    @_connection
-  end
+
+    def connection
+      @_connection
+    end
+
+    def user
+      @_user
+    end
 end
